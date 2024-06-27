@@ -25,13 +25,28 @@ perfectNumber(28)
 
 """Kullanicidan 2 tane sayi alarak bu sayilarin en büyük ortak bölenini (EBOB) dönen bir tane fonksiyon yazin. """
 
+
 listOfPrimeNumbers= [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97]  #prime numbers list
+divisorOfXY= [] #common divisor are gonna be in here
 
 def find_gcd(x,y):
-divisorOfXY= []  #common divisors are going to be in here
     for i in listOfPrimeNumbers:
         if x % i==0 and y % i==0:
             divisorOfXY.append(i)
+            y = y / i
+            x = x / i  
+            for i in listOfPrimeNumbers:
+                if x % i==0 and y % i==0:
+                    divisorOfXY.append(i)
+                    y = y / i
+                    x = x / i 
+                else:
+                    continue
         elif x % i==0 and y % i > 0:
-            continue  #burası güncellenecek kodun tekrar döngüye girmesi gerekiyor
+            y= y / i  #if the quotient is bigger than zero for y
+        elif x % i >0 and y % i == 0 : 
+            x = x / i
+        else:
+            continue
     print(divisorOfXY)
+
